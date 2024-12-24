@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassX - Your Personal Password Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <nav>
+        <div class="logo"><span style="color: #15803d; background-color: #1e293b;">&lt;</span>Pass<span
+                style="color: #15803d; background-color: #1e293b;">OP/&gt;</span></div>
+                
+                
+    </nav>
+
+    <div class="heading">
+        <div class="container">
+            <h1><span style="color: #15803d;">&lt;</span>Pass<span style="color: #15803d;">OP/&gt;</span></h1>
+            <p>Your Own Password Manager</p>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="img">
+            <img src="/password.webp" alt="Password Image">
+        </div>
+        <div class="text" style="background-color: #1e293b;">
+            <h1>SAFE!&nbsp;&nbsp;STRONG!&nbsp&nbsp;SECURE!</h1>
+            <!-- .head element for typed.js animation -->
+            <p>PassOP is a secure and reliable password manager designed to protect your sensitive information. With advanced encryption, it ensures your passwords are safe, while offering a user-friendly experience for managing, storing, and accessing credentials securely and efficiently. Enjoy peace of mind knowing that your digital security is in trusted hands, safeguarding your online presence.
+            </p>
+            <% if (typeof errorMessage !== 'undefined') { %>
+                <p style="color: red;"><%= errorMessage %></p>
+            <% } %>
+
+
+
+
+            <div class="btn-container">
+                <button class="register active" onclick="activate('register')">Register</button>
+                <div class="vertical-line"></div>
+                <button class="login" onclick="activate('login')">Login</button>
+            </div>
+            
+            <div id="registerForm" class="form-container">
+                <form method="post" action="/register">
+                    <div class="form-group-inline">
+                        <div class="usernamecol">
+                            <label for="reg-username">New Username:</label>
+                            <input type="text" id="reg-username" name="uuserName" placeholder="Enter new username" required maxlength="15" autocomplete="off">
+                        </div>
+            
+                        <div class="passwordcol">
+                            <label for="reg-password">New Password:</label>
+                            <input type="password" id="reg-password" name="upassword" placeholder="Enter new password" required maxlength="50" autocomplete="off">
+                        </div>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+            
+            <div id="loginForm" class="form-container hidden">
+                <form method="post" action="/login">
+                    <div class="form-group-inline">
+                        <div class="usernamecol">
+                            <label for="login-username">Username:</label>
+                            <input type="text" id="login-username" name="uuserName" placeholder="Enter your username" required maxlength="15" autocomplete="off">
+                        </div>
+            
+                        <div class="passwordcol">
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" name="upassword" placeholder="Enter your password" required maxlength="50" autocomplete="off">
+                        </div>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Typed.js initialization script -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> -->
+    <!-- <script>
+        var typed = new Typed(".head", {
+            strings: ["SAFE ! SECURE ! STRONG"],  // Single string
+            typeSpeed: 100,
+            backSpeed: 100,
+            backDelay: 1000,
+            loop: true,  // Don't loop since there's only one string
+            showCursor: true  // Optional: Hide cursor when there's only one string
+        });
+    </script> -->
+
+    <script>
+        function activate(formType) {
+            // Toggle active button styling
+            document.querySelector('.register').classList.remove('active');
+            document.querySelector('.login').classList.remove('active');
+            document.querySelector(`.${formType}`).classList.add('active');
+    
+            // Show the relevant form
+            if (formType === 'register') {
+                document.getElementById('registerForm').classList.remove('hidden');
+                document.getElementById('loginForm').classList.add('hidden');
+            } else if (formType === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registerForm').classList.add('hidden');
+            }
+        }
+    
+        // Activate the "Register" form by default on page load
+        window.onload = () => activate('register');
+    </script>
+    
+</body>
+
+</html>
